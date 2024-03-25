@@ -1,0 +1,41 @@
+name: flutter_music_ui
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+environment:
+  sdk: '>=3.2.5 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  flutter_bloc: ^8.1.3
+  equatable: ^2.0.5
+  flutter_svg: ^2.0.9
+  just_audio: ^0.9.36
+  audio_video_progress_bar: ^2.0.2
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  hive_generator: ^2.0.1
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.4.8
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+  fonts:
+    - family: Sora
+      fonts:
+        - asset: assets/fonts/SoraRegular.ttf
+          weight: 400
+        - asset: assets/fonts/SoraSemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/SoraBold.ttf
+          weight: 700
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/NunitoSemiBold.ttf
+          weight: 600
