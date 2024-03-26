@@ -27,6 +27,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     on(_onTapForwardEvent);
     on(_onTapBackwardEvent);
     on(_onSeekToPositionEvent);
+    on(_onAddToFavoritesEvent);
   }
 
   Future<void> _onPlayPauseEvent(
@@ -110,4 +111,14 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   }
 
 
+  void _onAddToFavoritesEvent(AddToFavoritesEvent event, Emitter<PlayerState> emit) {
+    if (favoriteBox.values.contains(event.audioFile)) {
+      favoriteBox.delete(event.audioFile.key);
+    } else {
+      favoriteBox.add(event.audioFile);
+    }
+
+    // Отправляем новое состояние, чтобы обновить интерфейс
+    emit(state.copyWith(isFavourite: !state.isFavourite));
+  }
 }

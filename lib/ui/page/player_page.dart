@@ -104,11 +104,19 @@ class PlayerPage extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
-                        child: SvgPicture.asset(
-                          ImageConstant.imgNavFavorites,
-                          width: 32,
-                          height: 32,
+                        onTap: () {
+                          final selectedMusic = musicList[state.selectedIndex!];
+                          context.read<PlayerBloc>().add(
+                              AddToFavoritesEvent(selectedMusic));
+                        },
+                        child: BlocBuilder<PlayerBloc, PlayerState>(
+                          builder: (context, state) {
+                            return SvgPicture.asset(
+                              state.isFavourite ? ImageConstant.imgHugeIcon : ImageConstant.imgNavFavorites,
+                              width: 32,
+                              height: 32,
+                            );
+                          },
                         ),
                       ),
                     ],

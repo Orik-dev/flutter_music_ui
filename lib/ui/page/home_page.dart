@@ -20,8 +20,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PlayerBloc, PlayerState>(builder: (context, state) {
       return Scaffold(
-        bottomNavigationBar:
-        state.selectedIndex != null ? const PlayNavBar() : const CustomBottomBar(),
+        bottomNavigationBar: state.selectedIndex != null
+            ? const PlayNavBar()
+            : const CustomBottomBar(),
         extendBody: true,
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -96,39 +97,44 @@ class HomePage extends StatelessWidget {
                                     const Spacer(
                                       flex: 3,
                                     ),
-                                    Expanded(
-                                      child: state.selectedIndex == index
-                                          ? SvgPicture.asset(
-                                              ImageConstant.imgPlay)
-                                          : SvgPicture.asset(
-                                              ImageConstant.imgIcPlay),
-                                    ),
+                                    state.selectedIndex == index
+                                        ? SvgPicture.asset(
+                                            ImageConstant.imgPlay)
+                                        : SvgPicture.asset(
+                                            ImageConstant.imgIcPlay),
                                   ],
                                 ),
                                 const Spacer(),
-                                Row(
-                                  children: [
-                                    Text(
-                                      music.musicArtist,
-                                      style: const TextStyle(
-                                        color: AppColors.textSubTitle,
-                                        fontSize: 14,
-                                        fontFamily: 'Sora',
-                                        fontWeight: FontWeight.w400,
-                                        height: 0,
-                                        letterSpacing: 0.42,
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        music.musicArtist,
+                                        style: const TextStyle(
+                                          color: AppColors.textSubTitle,
+                                          fontSize: 14,
+                                          fontFamily: 'Sora',
+                                          fontWeight: FontWeight.w400,
+                                          height: 0,
+                                          letterSpacing: 0.42,
+                                        ),
                                       ),
-                                    ),
-                                    const Spacer(
-                                      flex: 3,
-                                    ),
-                                    Expanded(
-                                      child: Image(
-                                        image: AssetImage(
-                                            ImageConstant.imgTimePlayer),
+                                      const Spacer(
+                                        flex: 3,
                                       ),
-                                    ),
-                                  ],
+                                      Text(
+                                        music.time ?? '00:00',
+                                        style: const TextStyle(
+                                          color: Color(0xFF818E98),
+                                          fontSize: 14,
+                                          fontFamily: 'Sora',
+                                          fontWeight: FontWeight.w400,
+                                          height: 0,
+                                          letterSpacing: 0.42,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),

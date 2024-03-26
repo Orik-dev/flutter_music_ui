@@ -10,33 +10,23 @@ class AudioFile extends HiveObject {
   @HiveField(1)
   final String image ;
   @HiveField(2)
-  final String imgTime;
+  final String? time;
   @HiveField(3)
   final String musicName;
   @HiveField(4)
   final String musicArtist;
   @HiveField(5)
   final String? path;
-  late int? isFavourite;
-  late String? time;
+
 
   AudioFile(  {
     required this.path,
     required this.id,
     required this.image,
-    required this.imgTime,
+    required this.time,
     required this.musicName,
     required this.musicArtist,
   });
 
-  Future<void> addToFavorites() async {
-    isFavourite = 1;
-    await save();
-  }
-
-  Future<void> removeFromFavorites() async {
-    isFavourite = 0;
-    await save();
-  }
 
 }

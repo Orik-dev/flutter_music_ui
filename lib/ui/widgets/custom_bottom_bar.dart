@@ -11,6 +11,8 @@ class CustomBottomBar extends StatefulWidget {
 
 class _CustomBottomBarState extends State<CustomBottomBar> {
   int _selectedIndex = 3;
+
+
   @override
   Widget build(BuildContext context) {
     return Padding(
