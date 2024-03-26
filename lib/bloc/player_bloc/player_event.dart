@@ -28,9 +28,7 @@ class OnPlayEvent extends PlayerEvent {
   @override
   List<Object> get props => [isPlaying, file];
 }
-
 class OnTapPrevEvent extends PlayerEvent {}
-
 class ProgressUpdateEvent extends PlayerEvent {
   final double progress;
 
@@ -39,8 +37,6 @@ class ProgressUpdateEvent extends PlayerEvent {
   @override
   List<Object> get props => [progress];
 }
-
-
 class SeekToPositionEvent extends PlayerEvent {
   final Duration position;
 
@@ -49,10 +45,7 @@ class SeekToPositionEvent extends PlayerEvent {
   @override
   List<Object> get props => [position];
 }
-
-
 class OnTapForwardEvent extends PlayerEvent {}
-
 class OnTapBackwardEvent extends PlayerEvent {}
 class SelectIndexEvent extends PlayerEvent {
   final int selectedIndex;

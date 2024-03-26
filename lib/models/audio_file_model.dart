@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_music_ui/ui/utils/image_constants.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:hive/hive.dart';
 
 part 'audio_file_model.g.dart';

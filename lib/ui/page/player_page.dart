@@ -1,4 +1,3 @@
-import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_music_ui/bloc/player_bloc/player_bloc.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_music_ui/repository/music_list.dart';
 import 'package:flutter_music_ui/ui/utils/image_constants.dart';
 import 'package:flutter_music_ui/ui/widgets/player_button_widget.dart';
 import 'package:flutter_music_ui/ui/widgets/progress_bar.dart';
-import 'package:flutter_music_ui/repository/music_list.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 
@@ -60,7 +58,9 @@ class PlayerPage extends StatelessWidget {
                     height: 310,
                     decoration: ShapeDecoration(
                       image: DecorationImage(
-                        image: AssetImage(ImageConstant.imgRectangle36),
+                        image: selectedMusic?.image != null
+                            ? AssetImage(selectedMusic!.image)
+                            : AssetImage(ImageConstant.imageNotFound),
                         fit: BoxFit.fill,
                       ),
                       shape: RoundedRectangleBorder(
@@ -77,7 +77,7 @@ class PlayerPage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: RichText(
-                          text:  TextSpan(
+                          text: TextSpan(
                             children: [
                               TextSpan(
                                 text: '${selectedMusic?.musicName}\n',
@@ -90,7 +90,7 @@ class PlayerPage extends StatelessWidget {
                                 ),
                               ),
                               TextSpan(
-                                text: '${selectedMusic?.musicName}',
+                                text: '${selectedMusic?.musicArtist}',
                                 style: const TextStyle(
                                   color: Color(0xFF8F9AA3),
                                   fontSize: 16,

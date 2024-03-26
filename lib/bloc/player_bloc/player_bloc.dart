@@ -1,15 +1,13 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_music_ui/models/audio_file_model.dart';
-import 'package:flutter_music_ui/repository/music_list.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
 
 part 'player_event.dart';
-
 part 'player_state.dart';
 
 class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
@@ -24,8 +22,8 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
 }) : super( const PlayerState()) {
     on(_onPlayPauseEvent);
     on(_onPlayEvent);
-    on<SelectIndexEvent>(_onSelectIndexEvent);
-    // on(_progressUpdate);
+    on(_onSelectIndexEvent);
+    on(_progressUpdate);
     on(_onTapForwardEvent);
     on(_onTapBackwardEvent);
     on(_onSeekToPositionEvent);
@@ -66,20 +64,19 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     });
   }
 
-  // Future<void> _progressUpdate(
-  //     ProgressUpdateEvent event, Emitter<PlayerState> emit) async {
-  //   if (event.progress == 1.0) {
-  //     // player.pause();
-  //     // player.seek(const Duration(seconds: 0));
-  //     // emit(state.copyWith(progress: 0.0,isPlaying: false));
-  //     add(OnPlayEvent(file: state.file!));
-  //   } else {
-  //     emit(state.copyWith(
-  //       progress: event.progress,
-  //     ));
-  //   }
-  // }
-
+  Future<void> _progressUpdate(
+      ProgressUpdateEvent event, Emitter<PlayerState> emit) async {
+    if (event.progress == 1.0) {
+      // player.pause();
+      // player.seek(const Duration(seconds: 0));
+      // emit(state.copyWith(progress: 0.0,isPlaying: false));
+      add(OnPlayEvent(file: state.file!));
+    } else {
+      emit(state.copyWith(
+        progress: event.progress,
+      ));
+    }
+  }
 
   void _onTapForwardEvent(OnTapForwardEvent event, Emitter<PlayerState> emit) {
     if (player.position.inSeconds < player.duration!.inSeconds - 10) {
@@ -108,18 +105,9 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   }
 
   void _onSelectIndexEvent(SelectIndexEvent event, Emitter<PlayerState> emit) {
-    // В этом методе вы можете обновить состояние блока в зависимости от выбранного индекса
     final newIndex = event.selectedIndex;
-
-    // Например, вы можете установить новый индекс в состоянии блока
     emit(state.copyWith(selectedIndex: newIndex));
   }
 
-  Stream<PlayerState> mapEventToState(PlayerEvent event) async* {
-    if (event is SelectIndexEvent) {
-      yield state.copyWith(selectedIndex: event.selectedIndex);
-    }
-    // Другие события...
-  }
 
 }
