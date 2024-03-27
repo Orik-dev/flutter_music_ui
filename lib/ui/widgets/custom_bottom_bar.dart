@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_music_ui/routes/app_routes.dart';
 import 'package:flutter_music_ui/ui/utils/image_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -10,8 +11,7 @@ class CustomBottomBar extends StatefulWidget {
 }
 
 class _CustomBottomBarState extends State<CustomBottomBar> {
-  int _selectedIndex = 3;
-
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -48,38 +48,65 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
             ),
             items: [
               BottomNavigationBarItem(
-                icon: _buildIcon(ImageConstant.imgNavMain, _selectedIndex == 0),
+                icon: _buildIcon(
+                  ImageConstant.imgNavMain,
+                  _selectedIndex == 0,
+                ),
                 label: 'Main',
               ),
               BottomNavigationBarItem(
-                  icon: _buildIcon(
-                      ImageConstant.imgNavSearch, _selectedIndex == 1),
-                  label: 'Search'),
+                icon: _buildIcon(
+                  ImageConstant.imgNavSearch,
+                  _selectedIndex == 1,
+                ),
+                label: 'Search',
+              ),
               BottomNavigationBarItem(
-                  icon: _buildIcon(
-                      ImageConstant.imgNavFavorites, _selectedIndex == 2),
-                  label: 'Favorites'),
+                icon: _buildIcon(
+                  ImageConstant.imgNavFavorites,
+                  _selectedIndex == 2,
+                ),
+                label: 'Favorites',
+              ),
               BottomNavigationBarItem(
-                  icon: _buildIcon(
-                      ImageConstant.imgNavPlaylist, _selectedIndex == 3),
-                  label: 'Playlist'),
+                icon: _buildIcon(
+                  ImageConstant.imgNavPlaylist,
+                  _selectedIndex == 3,
+                ),
+                label: 'Playlist',
+              ),
             ],
             currentIndex: _selectedIndex,
             onTap: (index) {
               setState(() {
                 _selectedIndex = index;
               });
+              switch (index) {
+                case 0:
+                  Navigator.pushReplacementNamed(context, AppRoutes.playerPage);
+                  break;
+                case 1:
+
+                  break;
+                case 2:
+                  Navigator.pushNamed(context, AppRoutes.favoritesPage);
+                  break;
+                case 3:
+                  Navigator.pushReplacementNamed(context, AppRoutes.initialRoute);
+                  break;
+                default:
+              }
             },
           ),
         ),
       ),
     );
   }
-}
 
-Widget _buildIcon(String assetName, bool isSelected) {
-  return SvgPicture.asset(
-    assetName,
-    color: isSelected ? Colors.blue : const Color(0xFFD2D7DA),
-  );
+  Widget _buildIcon(String assetName, bool isSelected) {
+    return SvgPicture.asset(
+      assetName,
+      color: isSelected ? Colors.blue : const Color(0xFFD2D7DA),
+    );
+  }
 }

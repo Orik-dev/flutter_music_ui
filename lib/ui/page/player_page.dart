@@ -9,14 +9,24 @@ import 'package:flutter_music_ui/ui/widgets/progress_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 
-class PlayerPage extends StatelessWidget {
-  PlayerPage({super.key});
+class PlayerPage extends StatefulWidget {
+  const PlayerPage({super.key});
 
   static Widget builder(BuildContext context) {
-    return PlayerPage();
+    return const PlayerPage();
   }
 
-  final favoriteBox = Hive.box<AudioFile>('favorite_songs');
+  @override
+  State<PlayerPage> createState() => _PlayerPageState();
+}
+
+class _PlayerPageState extends State<PlayerPage> {
+  late Box<AudioFile> favoriteBox;
+  @override
+  void initState() {
+    super.initState();
+    favoriteBox = Hive.box<AudioFile>('favorite_songs');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,21 +113,22 @@ class PlayerPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      InkWell(
-                        onTap: () {
-                          final selectedMusic = musicList[state.selectedIndex!];
-                          context.read<PlayerBloc>().add(
-                              AddToFavoritesEvent(selectedMusic));
-                        },
-                        child: BlocBuilder<PlayerBloc, PlayerState>(
-                          builder: (context, state) {
-                            return SvgPicture.asset(
-                              state.isFavourite ? ImageConstant.imgHugeIcon : ImageConstant.imgNavFavorites,
+                      BlocBuilder<PlayerBloc, PlayerState>(
+                        builder: (context, state) {
+                          return InkWell(
+                            onTap: () {
+                              final selectedMusic = musicList[state.selectedIndex!];
+                              context.read<PlayerBloc>().add(AddToFavoritesEvent(selectedMusic));
+                            },
+                            child: SvgPicture.asset(
+                              favoriteBox.values.contains(selectedMusic)
+                                  ? ImageConstant.imgHugeIcon
+                                  : ImageConstant.imgNavFavorites,
                               width: 32,
                               height: 32,
-                            );
-                          },
-                        ),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),

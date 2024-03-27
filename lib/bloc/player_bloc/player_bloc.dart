@@ -1,6 +1,5 @@
 import 'dart:async';
 
-
 import 'package:equatable/equatable.dart';
 import 'package:flutter_music_ui/models/audio_file_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +18,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   PlayerBloc({
     required this.player,
     required this.favoriteBox,
-}) : super( const PlayerState()) {
+  }) : super(const PlayerState()) {
     on(_onPlayPauseEvent);
     on(_onPlayEvent);
     on(_onSelectIndexEvent);
@@ -68,9 +67,9 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   Future<void> _progressUpdate(
       ProgressUpdateEvent event, Emitter<PlayerState> emit) async {
     if (event.progress == 1.0) {
-      // player.pause();
-      // player.seek(const Duration(seconds: 0));
-      // emit(state.copyWith(progress: 0.0,isPlaying: false));
+      player.pause();
+      player.seek(const Duration(seconds: 0));
+      emit(state.copyWith(progress: 0.0,isPlaying: false));
       add(OnPlayEvent(file: state.file!));
     } else {
       emit(state.copyWith(
@@ -105,20 +104,21 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     player.seek(event.position);
   }
 
-  void _onSelectIndexEvent(SelectIndexEvent event, Emitter<PlayerState> emit) {
+  Future<void> _onSelectIndexEvent(
+      SelectIndexEvent event, Emitter<PlayerState> emit) async {
     final newIndex = event.selectedIndex;
     emit(state.copyWith(selectedIndex: newIndex));
   }
 
-
-  void _onAddToFavoritesEvent(AddToFavoritesEvent event, Emitter<PlayerState> emit) {
+  Future<void> _onAddToFavoritesEvent(
+      AddToFavoritesEvent event, Emitter<PlayerState> emit) async {
     if (favoriteBox.values.contains(event.audioFile)) {
       favoriteBox.delete(event.audioFile.key);
     } else {
       favoriteBox.add(event.audioFile);
     }
-
-    // Отправляем новое состояние, чтобы обновить интерфейс
     emit(state.copyWith(isFavourite: !state.isFavourite));
   }
+
+
 }

@@ -17,7 +17,8 @@ class AudioFile extends HiveObject {
   final String musicArtist;
   @HiveField(5)
   final String? path;
-
+  @HiveField(6)
+  bool isFavourite;
 
   AudioFile(  {
     required this.path,
@@ -26,7 +27,11 @@ class AudioFile extends HiveObject {
     required this.time,
     required this.musicName,
     required this.musicArtist,
-  });
+    this.isFavourite = false,
+  }) : super();
 
+  bool isInFavorites(Box<AudioFile> favoriteBox) {
+    return favoriteBox.values.contains(this);
+  }
 
 }

@@ -20,9 +20,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PlayerBloc, PlayerState>(builder: (context, state) {
       return Scaffold(
-        bottomNavigationBar: state.selectedIndex != null
-            ? const PlayNavBar()
-            : const CustomBottomBar(),
+        bottomNavigationBar: CustomBottomBar(),
         extendBody: true,
         body: Padding(
           padding: const EdgeInsets.all(16.0),
