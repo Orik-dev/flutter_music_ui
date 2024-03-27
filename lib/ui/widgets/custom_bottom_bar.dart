@@ -83,7 +83,6 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
               });
               switch (index) {
                 case 0:
-                  Navigator.pushReplacementNamed(context, AppRoutes.playerPage);
                   break;
                 case 1:
 
