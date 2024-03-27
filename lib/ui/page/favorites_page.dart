@@ -39,7 +39,6 @@ class FavoritesPage extends StatelessWidget {
               subtitle: Text(song.musicArtist),
               leading: Image.asset(song.image),
               onTap: () {
-                Navigator.popAndPushNamed(context, AppRoutes.playerPage);
               },
             ),
           );

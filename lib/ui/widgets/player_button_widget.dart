@@ -5,7 +5,7 @@ import 'package:flutter_music_ui/ui/utils/image_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class PlayerButtonWidget extends StatelessWidget {
-  const PlayerButtonWidget({Key? key}) : super(key: key);
+  const PlayerButtonWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

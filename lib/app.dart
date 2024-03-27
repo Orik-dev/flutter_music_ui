@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_music_ui/bloc/player_bloc/player_bloc.dart';
 import 'package:flutter_music_ui/models/audio_file_model.dart';
 import 'package:flutter_music_ui/routes/app_routes.dart';
-import 'package:flutter_music_ui/ui/page/player_page.dart';
 import 'package:flutter_music_ui/ui/page/home_page.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:just_audio/just_audio.dart';
