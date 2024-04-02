@@ -3,7 +3,7 @@ import 'package:flutter_music_ui/models/audio_file_model.dart';
 import 'package:hive/hive.dart';
 
 class FavoritesPage extends StatelessWidget {
-   FavoritesPage({super.key});
+  FavoritesPage({super.key});
 
   static Widget builder(BuildContext context) {
     return FavoritesPage();
@@ -27,18 +27,26 @@ class FavoritesPage extends StatelessWidget {
               favoriteBox.delete(song.key);
             },
             direction: DismissDirection.endToStart,
-            background: Container(
-              color: Colors.red,
-              alignment: Alignment.centerRight,
-              padding: const EdgeInsets.only(right: 20.0),
-              child: const Icon(Icons.delete, color: Colors.white),
+            background: const DecoratedBox(
+              decoration: BoxDecoration(
+                color: Colors.red,
+              ),
+              child: Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ),
             child: ListTile(
               title: Text(song.musicName),
               subtitle: Text(song.musicArtist),
               leading: Image.asset(song.image),
-              onTap: () {
-              },
+              onTap: () {},
             ),
           );
         },
