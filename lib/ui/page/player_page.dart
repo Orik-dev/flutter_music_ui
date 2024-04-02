@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_music_ui/bloc/player_bloc/player_bloc.dart';
 import 'package:flutter_music_ui/models/audio_file_model.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_music_ui/repository/music_list.dart';
 import 'package:flutter_music_ui/ui/utils/image_constants.dart';
 import 'package:flutter_music_ui/ui/widgets/player_button_widget.dart';
 import 'package:flutter_music_ui/ui/widgets/progress_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 
@@ -46,102 +49,107 @@ class _PlayerPageState extends State<PlayerPage> {
                 Navigator.of(context).pop();
               },
             ),
-            title: const Text(
+            title: Text(
               'Now Playing',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Color(0xFF333333),
-                fontSize: 24,
+                color: const Color(0xFF333333),
+                fontSize: 24.sp,
                 fontFamily: 'Sora',
                 fontWeight: FontWeight.w700,
-                height: 0.06,
+                height: 1,
               ),
             ),
             centerTitle: true,
           ),
-          body: SingleChildScrollView(
+          body: Padding(
+            padding: const EdgeInsets.all(20.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Center(
-                  child: Container(
-                    width: 341.18,
-                    height: 310,
-                    decoration: ShapeDecoration(
-                      image: DecorationImage(
-                        image: selectedMusic?.image != null
-                            ? AssetImage(selectedMusic!.image)
-                            : AssetImage(ImageConstant.imageNotFound),
-                        fit: BoxFit.fill,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
-                      ),
+                Container(
+                  width: 341.18.w,
+                  height: 310.h,
+                  decoration: ShapeDecoration(
+                    image: DecorationImage(
+                      image: selectedMusic?.image != null
+                          ? AssetImage(selectedMusic!.image)
+                          : AssetImage(ImageConstant.imageNotFound),
+                      fit: BoxFit.fill,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24.w),
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: '${selectedMusic?.musicName}\n',
-                                style: const TextStyle(
-                                  color: Color(0xFF373E43),
-                                  fontSize: 32,
-                                  fontFamily: 'Sora',
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 0.96,
-                                ),
-                              ),
-                              TextSpan(
-                                text: '${selectedMusic?.musicArtist}',
-                                style: const TextStyle(
-                                  color: Color(0xFF8F9AA3),
-                                  fontSize: 16,
-                                  fontFamily: 'Sora',
-                                  fontWeight: FontWeight.w400,
-                                  letterSpacing: 0.48,
-                                ),
-                              ),
-                            ],
+                SizedBox(height: 35.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                            '${selectedMusic?.musicName}',
+                            style: TextStyle(
+                              color: const Color(0xFF373E43),
+                              fontSize: 32.sp,
+                              fontFamily: 'Sora',
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 0.96,
+                              height: 32.sp / 40.sp,
+                            ),
+                          ),
+                        
+                        SizedBox(height: 12.h),
+                        Text(
+                          '${selectedMusic?.musicArtist}',
+                          style: TextStyle(
+                            color: const Color(0xFF8F9AA3),
+                            fontSize: 16.sp,
+                            fontFamily: 'Sora',
+                            fontWeight: FontWeight.w400,
+                            letterSpacing: 0.48,
                           ),
                         ),
-                      ),
-                      BlocBuilder<PlayerBloc, PlayerState>(
-                        builder: (context, state) {
-                          return InkWell(
-                            onTap: () {
-                              final selectedMusic = musicList[state.selectedIndex!];
-                              context.read<PlayerBloc>().add(AddToFavoritesEvent(selectedMusic));
-                            },
-                            child: SvgPicture.asset(
-                              favoriteBox.values.contains(selectedMusic)
-                                  ? ImageConstant.imgHugeIcon
-                                  : ImageConstant.imgNavFavorites,
-                              width: 32,
-                              height: 32,
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                    const Spacer(),
+                    BlocBuilder<PlayerBloc, PlayerState>(
+                      builder: (context, state) {
+                        return InkWell(
+                          onTap: () {
+                            final selectedMusic =
+                                musicList[state.selectedIndex!];
+                            context
+                                .read<PlayerBloc>()
+                                .add(AddToFavoritesEvent(selectedMusic));
+                          },
+                          child: SvgPicture.asset(
+                            favoriteBox.values.contains(selectedMusic)
+                                ? ImageConstant.imgHugeIcon
+                                : ImageConstant.imgNavFavorites,
+                            width: 32.w,
+                            height: 32.h,
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 40),
-                  child: ProgressBarUp(),
-                ),
+                const ProgressBarUp(),
+                SizedBox(height: 78.44.h,),
                 const PlayerButtonWidget(),
-                const SizedBox(
-                  height: 50,
-                ),
-                Image.asset(ImageConstant.frame),
+                // Expanded(
+                //   child: Image.asset(
+                //     ImageConstant.frame,
+                //     height: 62.h,
+                //     width: 42.w,
+                //   ),
+                // ),
               ],
             ),
           ),

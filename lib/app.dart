@@ -4,6 +4,7 @@ import 'package:flutter_music_ui/bloc/player_bloc/player_bloc.dart';
 import 'package:flutter_music_ui/models/audio_file_model.dart';
 import 'package:flutter_music_ui/routes/app_routes.dart';
 import 'package:flutter_music_ui/ui/page/home_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -14,7 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final favoriteBox = Hive.box<AudioFile>('favorite_songs');
     final AudioPlayer player = AudioPlayer();
-    return BlocProvider(
+  return ScreenUtilInit(
+    designSize: const Size(393, 873),
+    minTextAdapt: true,
+    splitScreenMode: true,
+    builder: (_,child) {return BlocProvider(
       create: (context) => PlayerBloc(player: player, favoriteBox: favoriteBox),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -29,6 +34,7 @@ class MyApp extends StatelessWidget {
         initialRoute: AppRoutes.initialRoute,
         routes: AppRoutes.routes,
       ),
-    );
+    );},
+  );
   }
 }

@@ -1,11 +1,11 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_music_ui/app.dart';
 import 'package:flutter_music_ui/models/audio_file_model.dart';
 import 'package:hive_flutter/adapters.dart';
 
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setPreferredOrientations(
@@ -22,7 +22,14 @@ void main() async{
   Hive.registerAdapter(AudioFileAdapter());
   await Hive.openBox<AudioFile>('favorite_songs');
 
-
-  runApp(const MyApp());
+  runApp(
+    DevicePreview(
+      enabled: true,
+      tools: const [
+        ...DevicePreview.defaultTools,
+      ],
+      builder: (context) => const MyApp(),
+    ),
+  );
 }
 

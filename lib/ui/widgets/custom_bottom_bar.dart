@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music_ui/routes/app_routes.dart';
 import 'package:flutter_music_ui/ui/utils/image_constants.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomBottomBar extends StatefulWidget {
@@ -21,8 +22,8 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
         clipBehavior: Clip.hardEdge,
         borderRadius: BorderRadius.circular(30),
         child: Container(
-          width: 335,
-          height: 84,
+          width: 302.w,
+          // height: 30.h,
           decoration: ShapeDecoration(
             color: Colors.white,
             shape: RoundedRectangleBorder(
@@ -85,7 +86,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                 case 0:
                   break;
                 case 1:
-
+          
                   break;
                 case 2:
                   Navigator.pushNamed(context, AppRoutes.favoritesPage);
