@@ -13,7 +13,7 @@
 //     return BlocBuilder<PlayerBloc, PlayerState>(
 //       builder: (context, state) {
 //         final selectedMusic = state.selectedIndex != null
-//             ? musicList[state.selectedIndex!]
+            // ? musicList[state.selectedIndex!]
 //             : null;
 //         return Padding(
 //           padding: const EdgeInsets.all(29.0),

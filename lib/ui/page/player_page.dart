@@ -65,46 +65,49 @@ class _PlayerPageState extends State<PlayerPage> {
           body: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
+                SizedBox(
                   width: 341.18.w,
                   height: 310.h,
-                  decoration: ShapeDecoration(
-                    image: DecorationImage(
-                      image: selectedMusic?.image != null
-                          ? AssetImage(selectedMusic!.image)
-                          : AssetImage(ImageConstant.imageNotFound),
-                      fit: BoxFit.fill,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24.w),
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        alignment: Alignment.center,
+                        image: selectedMusic?.image != null
+                            ? AssetImage(selectedMusic!.image)
+                            : AssetImage(ImageConstant.imageNotFound),
+                        fit: BoxFit.fill,
+                      ),
+                      // shape: RoundedRectangleBorder(
+                      //   borderRadius: BorderRadius.circular(24.w),
+                      // ),
                     ),
                   ),
                 ),
                 SizedBox(height: 35.h),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                            '${selectedMusic?.musicName}',
-                            style: TextStyle(
-                              color: const Color(0xFF373E43),
-                              fontSize: 32.sp,
-                              fontFamily: 'Sora',
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 0.96,
-                              height: 32.sp / 40.sp,
-                            ),
+                          '${selectedMusic?.musicName}',
+                          style: TextStyle(
+                            color: const Color(0xFF373E43),
+                            fontSize: 32.sp,
+                            fontFamily: 'Sora',
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0.96.sp,
+                            height: 32.sp / 40.sp,
                           ),
-                        
-                        SizedBox(height: 12.h),
+                        ),
+                        SizedBox(height: 12.w),
                         Text(
                           '${selectedMusic?.musicArtist}',
                           style: TextStyle(
@@ -112,7 +115,7 @@ class _PlayerPageState extends State<PlayerPage> {
                             fontSize: 16.sp,
                             fontFamily: 'Sora',
                             fontWeight: FontWeight.w400,
-                            letterSpacing: 0.48,
+                            letterSpacing: 0.48.sp,
                           ),
                         ),
                       ],
@@ -141,15 +144,13 @@ class _PlayerPageState extends State<PlayerPage> {
                   ],
                 ),
                 const ProgressBarUp(),
-                SizedBox(height: 78.44.h,),
+                SizedBox(
+                  height: 78.44.h,
+                ),
                 const PlayerButtonWidget(),
-                // Expanded(
-                //   child: Image.asset(
-                //     ImageConstant.frame,
-                //     height: 62.h,
-                //     width: 42.w,
-                //   ),
-                // ),
+                SizedBox(
+                  height: 29.h,
+                ),
               ],
             ),
           ),

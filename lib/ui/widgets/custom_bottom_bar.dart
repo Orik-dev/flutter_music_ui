@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_music_ui/routes/app_routes.dart';
+import 'package:flutter_music_ui/ui/utils/app_colors.dart';
 import 'package:flutter_music_ui/ui/utils/image_constants.dart';
+import 'package:flutter_music_ui/ui/widgets/build_icon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 class CustomBottomBar extends StatefulWidget {
   const CustomBottomBar({super.key});
 
@@ -17,28 +17,15 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(29.0),
-      child: ClipRRect(
-        clipBehavior: Clip.hardEdge,
-        borderRadius: BorderRadius.circular(30),
-        child: Container(
-          width: 302.w,
-          // height: 30.h,
-          decoration: ShapeDecoration(
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(68),
-            ),
-            shadows: const [
-              BoxShadow(
-                color: Color(0x266E7880),
-                blurRadius: 20,
-                offset: Offset(0, 4),
-                spreadRadius: 0,
-              )
-            ],
-          ),
+      padding: const EdgeInsets.only(bottom:29.0,left: 29,right: 29),
+      child: SizedBox(
+        width: 337.w,
+        height: 100.h,
+        child: ClipRRect(
+          clipBehavior: Clip.hardEdge,
+          borderRadius: BorderRadius.circular(68),
           child: BottomNavigationBar(
+            backgroundColor:  Colors.white,
             type: BottomNavigationBarType.fixed,
             selectedLabelStyle: const TextStyle(
               fontFamily: 'Sora',
@@ -49,30 +36,30 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
             ),
             items: [
               BottomNavigationBarItem(
-                icon: _buildIcon(
-                  ImageConstant.imgNavMain,
-                  _selectedIndex == 0,
+                icon: BuildIcon(
+                  assetName: ImageConstant.imgNavMain,
+                  isSelected: _selectedIndex == 0,
                 ),
                 label: 'Main',
               ),
               BottomNavigationBarItem(
-                icon: _buildIcon(
-                  ImageConstant.imgNavSearch,
-                  _selectedIndex == 1,
+                icon: BuildIcon(
+                  assetName: ImageConstant.imgNavSearch,
+                  isSelected: _selectedIndex == 1,
                 ),
                 label: 'Search',
               ),
               BottomNavigationBarItem(
-                icon: _buildIcon(
-                  ImageConstant.imgNavFavorites,
-                  _selectedIndex == 2,
+                icon: BuildIcon(
+                  assetName: ImageConstant.imgNavFavorites,
+                  isSelected: _selectedIndex == 2,
                 ),
                 label: 'Favorites',
               ),
               BottomNavigationBarItem(
-                icon: _buildIcon(
-                  ImageConstant.imgNavPlaylist,
-                  _selectedIndex == 3,
+                icon: BuildIcon(
+                  assetName: ImageConstant.imgNavPlaylist,
+                  isSelected: _selectedIndex == 3,
                 ),
                 label: 'Playlist',
               ),
@@ -86,13 +73,13 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                 case 0:
                   break;
                 case 1:
-          
                   break;
                 case 2:
                   Navigator.pushNamed(context, AppRoutes.favoritesPage);
                   break;
                 case 3:
-                  Navigator.pushReplacementNamed(context, AppRoutes.initialRoute);
+                  Navigator.pushReplacementNamed(
+                      context, AppRoutes.initialRoute);
                   break;
                 default:
               }
@@ -100,13 +87,6 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildIcon(String assetName, bool isSelected) {
-    return SvgPicture.asset(
-      assetName,
-      color: isSelected ? Colors.blue : const Color(0xFFD2D7DA),
     );
   }
 }
