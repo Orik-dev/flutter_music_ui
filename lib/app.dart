@@ -4,10 +4,11 @@ import 'package:flutter_music_ui/bloc/player_bloc/player_bloc.dart';
 import 'package:flutter_music_ui/models/audio_file_model.dart';
 import 'package:flutter_music_ui/routes/app_routes.dart';
 import 'package:flutter_music_ui/ui/page/home_page.dart';
-import 'package:flutter_music_ui/ui/widgets/custom_bottom_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'generated/l10n.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -25,6 +26,13 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               PlayerBloc(player: player, favoriteBox: favoriteBox),
           child: MaterialApp(
+            localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
             debugShowCheckedModeBanner: false,
             title: 'Test app',
             theme: ThemeData(

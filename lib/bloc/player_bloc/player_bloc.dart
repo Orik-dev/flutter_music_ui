@@ -29,18 +29,23 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     on(_onAddToFavoritesEvent);
   }
 
-  Future<void> _onPlayPauseEvent(
+    Future<void> _onPlayPauseEvent(
       PlayPauseEvent event, Emitter<PlayerState> emit) async {
     if (isPlaying) {
       player.pause();
+      emit(state.copyWith(
+        isPlaying: false,
+      ));
     } else {
       player.play();
+      emit(state.copyWith(
+        isPlaying: true,
+      ));
     }
-    emit(state.copyWith(
-      isPlaying: !isPlaying,
-    ));
-    isPlaying = !isPlaying;
+    isPlaying = event.isPlaying;
   }
+
+
 
   Future<void> _onPlayEvent(
       OnPlayEvent event, Emitter<PlayerState> emit) async {
@@ -53,6 +58,9 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
         // isFavourite: event.file.isFavourite == 1,
         status: SongStatus.playing,
         file: event.file));
+
+
+
     Timer.periodic(const Duration(milliseconds: 1), (timer) {
       progress = player.duration == null
           ? 0.0

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_music_ui/generated/l10n.dart';
 import 'package:flutter_music_ui/models/audio_file_model.dart';
 import 'package:hive/hive.dart';
 
@@ -15,7 +16,7 @@ class FavoritesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorites'),
+        title:  Text(S.of(context).favorites),
       ),
       body: ListView.builder(
         itemCount: favoriteBox.length,

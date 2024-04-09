@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_music_ui/generated/l10n.dart';
 import 'package:flutter_music_ui/routes/app_routes.dart';
-import 'package:flutter_music_ui/ui/utils/app_colors.dart';
 import 'package:flutter_music_ui/ui/utils/image_constants.dart';
 import 'package:flutter_music_ui/ui/widgets/build_icon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,21 +40,21 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                   assetName: ImageConstant.imgNavMain,
                   isSelected: _selectedIndex == 0,
                 ),
-                label: 'Main',
+                label: S.of(context).main,
               ),
               BottomNavigationBarItem(
                 icon: BuildIcon(
                   assetName: ImageConstant.imgNavSearch,
                   isSelected: _selectedIndex == 1,
                 ),
-                label: 'Search',
+                label: S.of(context).search,
               ),
               BottomNavigationBarItem(
                 icon: BuildIcon(
                   assetName: ImageConstant.imgNavFavorites,
                   isSelected: _selectedIndex == 2,
                 ),
-                label: 'Favorites',
+                label: S.of(context).favorites,
               ),
               BottomNavigationBarItem(
                 icon: BuildIcon(

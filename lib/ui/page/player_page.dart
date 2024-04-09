@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_music_ui/bloc/player_bloc/player_bloc.dart';
+import 'package:flutter_music_ui/generated/l10n.dart';
 import 'package:flutter_music_ui/models/audio_file_model.dart';
 import 'package:flutter_music_ui/repository/music_list.dart';
 import 'package:flutter_music_ui/ui/utils/image_constants.dart';
@@ -31,6 +31,8 @@ class _PlayerPageState extends State<PlayerPage> {
     favoriteBox = Hive.box<AudioFile>('favorite_songs');
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PlayerBloc, PlayerState>(
@@ -50,12 +52,12 @@ class _PlayerPageState extends State<PlayerPage> {
               },
             ),
             title: Text(
-              'Now Playing',
+              S.of(context).nowPlaying,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: const Color(0xFF333333),
                 fontSize: 24.sp,
-                fontFamily: 'Sora',
+                fontFamily: S.of(context).sora,
                 fontWeight: FontWeight.w700,
                 height: 1,
               ),
